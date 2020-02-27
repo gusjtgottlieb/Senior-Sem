@@ -54,48 +54,53 @@ int mapping(int x, int y) {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (Serial.available() > 0) {
-    leds[mapping(x, y)] = (0, 0, 0);
-    int comm = Serial.read();
-    if (comm == w) {
-      if (y == y_max) {
-      }
-      else {
-        y += 1;
-      }
-    }
-    else if (comm == a) {
-      if (x == 0) {
-      }
-      else {
-        x -= 1;
-      }
-    }
-    else if (comm == s) {
-      if (y == 0) {
-      }
-      else {
-        y -= 1;
-      }
-    }
-    else if (comm == d) {
-      if (x == x_max) {
-      }
-      else {
-        x += 1;
-      }
-    }
+  while (true) {
     
-    Serial.println("X: ");
-    Serial.println(x);
-    Serial.println("Y: ");
-    Serial.println(y);
-    Serial.println("Enter a command");
+    if (Serial.available() > 0) {
+      leds[mapping(x, y)] = (0, 0, 0);
+      int comm = Serial.read();
+    }
+    while (Serial.available < 1) {
+      if (comm == w) {
+        if (y == y_max) {
+        }
+        else {
+          y += 1;
+        }
+      }
+      else if (comm == a) {
+        if (x == 0) {
+        }
+        else {
+          x -= 1;
+        }
+      }
+      else if (comm == s) {
+        if (y == 0) {
+        }
+        else {
+          y -= 1;
+        }
+      }
+      else if (comm == d) {
+        if (x == x_max) {
+        }
+        else {
+          x += 1;
+        }
+      }
 
-    FastLED.show();
-    leds[mapping(x, y)] = CRGB(0, 0, 255);
-    FastLED.show();
-    //delay(100);
+      Serial.println("X: ");
+      Serial.println(x);
+      Serial.println("Y: ");
+      Serial.println(y);
+      Serial.println("Enter a command");
+
+      FastLED.show();
+      leds[mapping(x, y)] = CRGB(0, 0, 255);
+      FastLED.show();
+      delay(100);
+    }
   }
   
 //  for (int i = 0; i < 12; i++) {
